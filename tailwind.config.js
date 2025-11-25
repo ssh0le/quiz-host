@@ -10,6 +10,9 @@ module.exports = {
         'page-count': '20px',
         'page-delimiter': '8px',
       },
+      duration: {
+        2000: '2000ms',
+      },
       colors: {
         primary: {
           50: '#f0f9ff',
