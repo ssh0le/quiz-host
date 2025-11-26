@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
+    "serve": "node server.js",
     "lint": "eslint . --ext .ts",
     "steiger": "steiger ./src --no-interactive"
   },
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.1",
+    "express": "^4.18.2",
     "flag-icons": "^7.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

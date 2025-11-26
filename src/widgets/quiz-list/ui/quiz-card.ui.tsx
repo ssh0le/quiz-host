@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { routes } from '@shared/constants/routes';
+
 interface QuizCardProps {
   id: number;
   title: string;
@@ -5,9 +8,15 @@ interface QuizCardProps {
   imageUrl?: string;
 }
 
-export const QuizCard = ({ title, description, imageUrl }: QuizCardProps) => {
+export const QuizCard = ({ id, title, description, imageUrl }: QuizCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(routes.dashboardDetail.replace(':id', id.toString()));
+  };
+
   return (
-    <div className="flex flex-col border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex flex-col border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
       {/* Picture space */}
       <div className="w-full aspect-video bg-gray-100 flex items-center justify-center">
         {imageUrl ? (
@@ -17,7 +26,11 @@ export const QuizCard = ({ title, description, imageUrl }: QuizCardProps) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-gray-400 text-sm">No image</div>
+          <img
+            src="/assets/default-image.jpg"
+            alt={title}
+            className="w-full h-full object-cover"
+          />
         )}
       </div>
 
@@ -28,7 +41,10 @@ export const QuizCard = ({ title, description, imageUrl }: QuizCardProps) => {
       </div>
 
       {/* Button with full container width */}
-      <button className="w-full bg-primary-500 hover:bg-primary-700 text-white font-medium py-3 px-4 transition-colors">
+      <button
+        onClick={handleClick}
+        className="w-full bg-primary-500 hover:bg-primary-700 text-white font-medium py-3 px-4 transition-colors"
+      >
         Start Quiz
       </button>
     </div>

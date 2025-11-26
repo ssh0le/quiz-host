@@ -1,21 +1,22 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { PageWrapper } from '@shared/ui';
+import { routes } from '@shared/constants/routes';
 
 const navLinks = [
   {
     title: 'Solo Quizzes',
-    route: '/dashboard',
+    route: routes.dashboard,
     icon: '📚',
   },
   {
     title: 'Multiplayer',
-    route: '/multiplayer',
+    route: routes.multiplayer,
     icon: '👥',
   },
   {
     title: 'Settings',
-    route: '/settings',
+    route: routes.settings,
     icon: '⚙️',
   },
 ];
@@ -24,7 +25,7 @@ const transitionDuration = 300;
 const menuItemWidth = 48;
 
 export const PublicLayout = ({ children }: { children: ReactNode }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
@@ -40,7 +41,6 @@ export const PublicLayout = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -73,9 +73,7 @@ export const PublicLayout = ({ children }: { children: ReactNode }) => {
             ? `fixed inset-y-0 left-0 ${
                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
               }`
-            : `relative ${
-                isSidebarOpen ? 'w-64' : 'w-20'
-              }`
+            : `relative ${isSidebarOpen ? 'w-64' : 'w-20'}`
         }`}
         style={{
           transitionDuration: `${transitionDuration}ms`,
