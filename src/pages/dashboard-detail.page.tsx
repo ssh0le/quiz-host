@@ -1,11 +1,23 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { routes, quizzesDb } from '@shared/constants';
+import { useState } from 'react';
+import { CountriesQuiz } from '@widgets/countries-quiz/ui/countries-quiz.ui';
 
 const DashboardDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleStartQuiz = () => {
+    setIsOpen(true);
+  };
+
   const navigate = useNavigate();
 
   const quiz = quizzesDb.find((q) => q.id === Number(id));
+
+  if (isOpen) {
+    return <CountriesQuiz />;
+  }
 
   if (!quiz) {
     return (
@@ -62,7 +74,10 @@ const DashboardDetail = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="flex-1 bg-primary-500 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+            <button
+              onClick={handleStartQuiz}
+              className="flex-1 bg-primary-500 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
               Start Quiz
             </button>
             <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
